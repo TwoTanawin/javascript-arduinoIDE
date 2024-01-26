@@ -4,12 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arduino Program Uploader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+        }
+        input[type="text"] {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <input type="file" id="fileInput">
-    <button onclick="uploadFile()">Upload</button>
-    <div id="status"></div>
+    <div class="container">
+        <h2>Select Port and Baud Rate</h2>
+        <form id="configForm">
+            <input type="text" id="port" placeholder="Port (e.g., COM3)">
+            <input type="text" id="baudRate" placeholder="Baud Rate (e.g., 9600)">
+            <br>
+            <button type="submit">Connect</button>
+        </form>
+        <div id="status"></div>
+    </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('configForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const port = document.getElementById('port').value;
+            const baudRate = document.getElementById('baudRate').value;
+            
+            connectToArduino(port, baudRate);
+        });
+
+        function connectToArduino(port, baudRate) {
+            // You can implement your connection logic here
+            // For example, using Web Serial API or WebSocket to communicate with Node.js server
+            // Once connected, update the status message
+            document.getElementById('status').innerText = `Connecting to ${port} at ${baudRate} baud rate...`;
+        }
+    </script>
 </body>
 </html>
